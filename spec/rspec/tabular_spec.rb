@@ -1,4 +1,4 @@
-require 'rspec/tabular'
+require 'spec_helper'
 
 describe Rspec::Tabular do
   let(:test_class) { double }
