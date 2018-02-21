@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec',      '~> 2.99.0'
   spec.add_development_dependency 'rubocop',    '>= 0.30.0'
   spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'codeclimate-test-reporter'
 end
