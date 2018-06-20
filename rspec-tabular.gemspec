@@ -14,14 +14,26 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'http://github.com/sugarcrm/rspec-tabular'
   spec.license       = 'Apache-2.0'
 
-  spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
+    f.match(%r{^(test|spec|features)/})
+  end
+  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
+  spec.required_ruby_version = '>= 2.1.0'
+
   spec.add_runtime_dependency     'rspec-core', '>= 2.99.0'
+
   spec.add_development_dependency 'bundler',    '~> 1.7'
   spec.add_development_dependency 'rake',       '~> 10.0'
   spec.add_development_dependency 'rspec',      '~> 2.99.0'
-  spec.add_development_dependency 'rubocop',    '>= 0.30.0'
+
+  # Dependencies whose APIs we do not really depend upon, and can be upgraded
+  # without limiting.
+  spec.add_development_dependency 'bundler-audit'
+  spec.add_development_dependency 'license_finder'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-rspec'
   spec.add_development_dependency 'simplecov'
 end

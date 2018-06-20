@@ -1,7 +1,6 @@
 # Rspec::Tabular
 
 [![Gem Version](https://badge.fury.io/rb/rspec-tabular.svg)](http://badge.fury.io/rb/rspec-tabular)
-[![Dependency Status](https://gemnasium.com/sugarcrm/rspec-tabular.svg)](https://gemnasium.com/sugarcrm/rspec-tabular)
 [![Build Status](https://travis-ci.org/sugarcrm/rspec-tabular.svg?branch=master)](https://travis-ci.org/sugarcrm/rspec-tabular)
 [![Code Climate](https://codeclimate.com/github/sugarcrm/rspec-tabular/badges/gpa.svg)](https://codeclimate.com/github/sugarcrm/rspec-tabular)
 [![Test Coverage](https://codeclimate.com/github/sugarcrm/rspec-tabular/badges/coverage.svg)](https://codeclimate.com/github/sugarcrm/rspec-tabular/coverage)
