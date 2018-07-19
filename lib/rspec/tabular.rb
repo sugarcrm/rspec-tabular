@@ -106,7 +106,12 @@ module Rspec
 
     # Example with an implicit subject execution
     def side_effects_with(*args)
-      it_with(*args) { subject }
+      it_with(*args) do
+        begin
+          subject
+        rescue Exception # rubocop:disable Lint/HandleExceptions, Lint/RescueException
+        end
+      end
     end
 
     def raise_error_with(*args)

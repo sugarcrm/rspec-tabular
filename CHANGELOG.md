@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Changed
 - support checking Exception class and message in the same row
+- catch exceptions when checking side effects, instead of raising the exception
 
 ## 0.0.1 - 2015-10-01
 ### Added

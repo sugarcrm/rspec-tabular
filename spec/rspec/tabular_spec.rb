@@ -45,11 +45,30 @@ describe Rspec::Tabular do
   # NOTE: no spec for 'alias specify_with it_with'
 
   describe '#side_effects_with' do
-    subject { test_class.method(input1, input2) }
+    context 'when no exception is raised' do
+      subject { test_class.method(input1, input2) }
 
-    inputs            :input1, :input2
-    side_effects_with :value1, :value2
-    side_effects_with :value3, :value4
+      inputs            :input1, :input2
+      side_effects_with :value1, :value2
+      side_effects_with :value3, :value4
+    end
+
+    context 'when an exception is raised' do
+      subject { test_class.error_method(input1, input2) }
+
+      before do
+        allow(test_class).to receive(:error_method)
+          .with(:value1, :value2)
+          .and_raise('failure 1')
+        allow(test_class).to receive(:error_method)
+          .with(:value3, :value4)
+          .and_raise(Exception)
+      end
+
+      inputs            :input1, :input2
+      side_effects_with :value1, :value2
+      side_effects_with :value3, :value4
+    end
   end
 
   describe '#raise_error_with' do
