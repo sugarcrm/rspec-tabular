@@ -64,6 +64,7 @@ module Rspec
   #
   #     raise_error_with  'bad1',   'bad2',   'bad3',   'error'
   #     raise_error_with  'bad4',   'bad5',   'bad6',   TestException
+  #     raise_error_with  'bad4',   'bad5',   'bad6',   TestException, 'error'
   #
   #     side_effects_with 'value4', 'value5', 'value6'
   #   end
@@ -108,8 +109,13 @@ module Rspec
       it_with(*args) { subject }
     end
 
-    def raise_error_with(*args, expected_exception)
-      it_with(*args) { expect { subject }.to raise_error(expected_exception) }
+    def raise_error_with(*args)
+      raise_error_args = args
+      it_with_args     = raise_error_args.slice!(0, metadata[:inputs].size)
+
+      it_with(*it_with_args) do
+        expect { subject }.to raise_error(*raise_error_args)
+      end
     end
 
     def its_with(attribute, *input_values, &block)

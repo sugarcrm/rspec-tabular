@@ -71,6 +71,8 @@ describe Rspec::Tabular do
     raise_error_with :value1, :value2, 'failure 1'
     raise_error_with :value3, :value4, 'failure 2'
     raise_error_with :value5, :value6, StandardError
+    raise_error_with :value1, :value2, StandardError, 'failure 1'
+    raise_error_with :value3, :value4, StandardError, 'failure 2'
   end
 
   describe '#its_with' do
