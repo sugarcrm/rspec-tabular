@@ -1,5 +1,6 @@
-# coding: utf-8
-lib = File.expand_path('../lib', __FILE__)
+# frozen_string_literal: true
+
+lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'rspec/tabular/version'
 
@@ -9,8 +10,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Andrew Sullivan Cant']
   spec.email         = ['acant@sugarcrm.com']
 
-  spec.summary       = %q{RSpec extension for writing tabular examples.}
-  spec.description   = %q{RSpec DSL which makes is easier and cleaner to write tabular examples.}
+  spec.summary       = 'RSpec extension for writing tabular examples.'
+  spec.description   = 'RSpec DSL which makes is easier and cleaner to write tabular examples.'
   spec.homepage      = 'http://github.com/sugarcrm/rspec-tabular'
   spec.license       = 'Apache-2.0'
 
