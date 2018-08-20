@@ -27,7 +27,102 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Here is an overall example using the rspec, followed by some more details of
+the specified scenarios:
+
+The input values which are specified are exposed as *let* values, so they can
+be used in both the subject inputs or in stub/double expectations specified in
+a before block.
+
+```
+describe '#thing' do
+  subject { subject.thing(input1, input2) }
+  before ( stub_model(ThingyModel, name: input3) }
+
+  let(:expected_value) { :expected_value }
+
+  inputs            :input1,  :input2,  :input3
+  it_with           'value1', 'value2', 'value3',  nil
+  it_with           'value4', 'value5', 'value6',  true
+  it_with           'value7', 'value8', 'value9',  'foobar'
+  specify_with      'value1', 'value2', 'value3',  'foobar'
+  it_with(          'value1', 'value2', 'value3' ) { is_expected.to eq(expected_value) }
+  specify_with(     'value1', 'value2', 'value3' ) { expect(subject).to eq(expected_value) }
+
+  its_with :method, 'value1', 'value2', 'value3',  'something'
+
+  raise_error_with  'bad1',   'bad2',   'bad3',    'error'
+  raise_error_with  'bad4',   'bad5',   'bad6',    TestException
+  raise_error_with  'bad4',   'bad5',   'bad6',    TestException, 'error'
+
+  side_effects_with 'value4', 'value5', 'value6'
+```
+
+*specify_with* is an alias to *it_with*, therefore they both have the same
+behaviour.
+
+Please remember inputs or expected result values MUST be literal values, and cannot be
+values memoized with let, because the let values are not evaluated soon enough.
+You can use let values in the expectations if they are specified in a block.
+(e.g., { is_expected.to eq(expected_value) })
+
+
+### Equivalencies
+
+Each of the tabular statements has an equivlanet non-tabular example to which
+is corresponds.
+
+```
+it_with           'value1', 'value2', 'value3', nil
+
+# Equivalent to:
+context do
+  let(:input1) { 'value1' }
+  let(:input2) { 'value2' }
+  let(:input3) { 'value3' }
+
+  it { expected.to be_nil }
+end
+```
+
+```
+it_with(          'value1', 'value2', 'value3' ) { is_expected.to eq(expected_value) }
+
+# Equivalent to:
+context do
+  let(:input1) { 'value1' }
+  let(:input2) { 'value2' }
+  let(:input3) { 'value3' }
+
+  it { is_expected.to eq('expected') } }
+end
+```
+
+```
+raise_error_with  'bad4',   'bad5',   'bad6',    TestException, 'error'
+
+# Equivalent to:
+context do
+  let(:input1) { 'bad4' }
+  let(:input2) { 'bad5' }
+  let(:input3) { 'bad6' }
+
+  specify { expect { subject }.to raise_error(TestException, 'error') }
+end
+```
+
+```
+side_effects_with 'value4', 'value5', 'value6'
+
+# Equivalent to:
+context do
+  let(:input1) { 'value4' }
+  let(:input2) { 'value5' }
+  let(:input3) { 'value6' }
+
+  specify { subject } }
+end
+```
 
 ## Development
 

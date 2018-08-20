@@ -48,7 +48,7 @@ module Rspec
   #
   #     its_with(:method, 'value4', 'value5', 'value6') { should eq('something') }
   #
-  #     specify(          'value1', 'value2', 'value3' ) { helper_method.should eq('expected') }
+  #     specify_with(     'value1', 'value2', 'value3' ) { helper_method.should eq('expected') }
   #   end
   #
   #   describe 'a thing with implicit shoulds' do
