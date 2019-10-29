@@ -4,8 +4,10 @@
 [![Build Status](https://travis-ci.org/sugarcrm/rspec-tabular.svg?branch=master)](https://travis-ci.org/sugarcrm/rspec-tabular)
 [![Code Climate](https://codeclimate.com/github/sugarcrm/rspec-tabular/badges/gpa.svg)](https://codeclimate.com/github/sugarcrm/rspec-tabular)
 [![Test Coverage](https://codeclimate.com/github/sugarcrm/rspec-tabular/badges/coverage.svg)](https://codeclimate.com/github/sugarcrm/rspec-tabular/coverage)
-[![Inline docs](http://inch-ci.org/github/sugarcrm/rspec-tabular.svg)](http://inch-ci.org/github/sugarcrm/rspec-tabular)
 [![License](http://img.shields.io/badge/license-Apache2-green.svg?style=flat)](LICENSE)
+
+[![Inline docs](http://inch-ci.org/github/sugarcrm/rspec-tabular.svg)](http://inch-ci.org/github/sugarcrm/rspec-tabular)
+[![RubyDoc](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](http://rubydoc.org/gems/rspec-tabular)
 
 Rspec extension for writing tabular examples
 
@@ -130,14 +132,25 @@ After checking out the repo, run `bin/setup` to install dependencies. Then, run 
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release` to create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
+## Elsewhere on the web
+
+Links to other places on the web where this projects exists:
+
+* [Code Climate](https://codeclimate.com/github/sugarcrm/rspec-tabular)
+* [CucumberPro](https://app.cucumber.pro/projects/rspec-tabular)
+* [InchCI](http://inch-ci.org/github/sugarcrm/rspec-tabular)
+* [Github](https://github.com/sugarcrm/rspec-tabular)
+* [OpenHub](https://www.openhub.net/p/rspec-tabular)
+* [RubyDoc](http://rubydoc.org/gems/rspec-tabular)
+* [RubyGems](https://rubygems.org/gems/rspec-tabular)
+* [Ruby LibHunt](https://ruby.libhunt.com/rspec-tabular-alternatives)
+* [Ruby Toolbox](https://www.ruby-toolbox.com/projects/rspec-tabular)
+* [TravisCI](https://travis-ci.org/sugarcrm/rspec-tabular)
+
 ## Contributing
 
-1. Fork it ( https://github.com/sugarcrm/rspec-tabular/fork )
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
+See [CONTRIBUTING](CONTRIBUTING.md) for how you can contribute changes back into this project.
 
 ## License
 
-Copyright 2015 [SugarCRM Inc.](http://sugarcrm.com), released under the Apache2 License.
+Copyright 2019 [SugarCRM Inc.](http://sugarcrm.com), released under the Apache2 License.
