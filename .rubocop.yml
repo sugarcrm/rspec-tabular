@@ -4,11 +4,18 @@ Metrics/LineLength:
   Max: 100
 
 Metrics/MethodLength:
-  Max: 20
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
 
 RSpec/EmptyExampleGroup:
   Enabled: false
 
+RSpec/ImplicitSubject:
+  Enabled: false
+
 Metrics/BlockLength:
+  Max: 100
   Exclude:
     - spec/**/*

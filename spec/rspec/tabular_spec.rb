@@ -106,4 +106,12 @@ describe Rspec::Tabular do
     its_with :method1, :value1, :value2, :result1
     its_with :method2, :value1, :value2, :result2
   end
+
+  context 'with wrapped value' do
+    subject { test_class.method(input1, input2) }
+
+    inputs  :input1,                        :input2
+    it_with with_context(proc { :value1 }), :value2,                        :result1
+    it_with :value3,                        with_context(proc { :value4 }), :result2
+  end
 end

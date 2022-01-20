@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'rspec/tabular/version'
+require 'rspec/tabular/wrapped'
 
-module Rspec
+module RSpec
   # rubocop:disable all
 
   # This module will allow examples to be specified in a more clean tabular
@@ -69,6 +70,17 @@ module Rspec
   #     side_effects_with 'value4', 'value5', 'value6'
   #   end
   #
+  # Values that need an it/before scope can be wrapped using the helper function
+  # `with_context`. An optional 2nd parameter will provide a value to write out
+  # to the reporter
+  #
+  #   describe 'a thing with item compairsons' do
+  #     subject { subject.thing(input1) }
+  #
+  #     inputs  :input1
+  #     it_with with_context(proc { instance_double(ThingyModel) }), 'foobar'
+  #     it_with with_context(proc { double }, 'double'),             'foobar'
+  #
   # Inputs can also be specified as block arguments. I am not sure if this is
   # really useful, it might be deprecated in the future.
   #
@@ -82,90 +94,107 @@ module Rspec
 
   # rubocop:enable all
   module Tabular
-    def inputs(*args)
-      metadata[:inputs] ||= args
-    end
-
-    def it_with(*input_values, &block)
-      if block.nil? && (metadata[:inputs].size == input_values.size - 1)
-        expected_value = input_values.pop
-        block = proc { is_expected.to eq(expected_value) }
+    # Example group methods e.g. inside describe/context block
+    module ExampleGroup
+      def inputs(*args)
+        metadata[:inputs] ||= args
       end
 
-      context("with #{Hash[metadata[:inputs].zip input_values]}") do
-        metadata[:inputs].each_index do |i|
-          key = metadata[:inputs][i]
-          let(key) { input_values[i] }
+      def it_with(*input_values, &block)
+        if block.nil? && (metadata[:inputs].size == input_values.size - 1)
+          expected_value = input_values.pop
+          block = proc { is_expected.to eq(expected_value) }
         end
 
-        example(nil, { input_values: input_values }, &block)
+        context("with #{Hash[metadata[:inputs].zip input_values]}") do
+          metadata[:inputs].each_index do |i|
+            key = metadata[:inputs][i]
+            value = input_values[i]
+            let(key) { _unwrap(value) }
+          end
+
+          example(nil, { input_values: input_values }, &block)
+        end
       end
-    end
 
-    alias specify_with it_with
+      alias specify_with it_with
 
-    # Example with an implicit subject execution
-    def side_effects_with(*args)
-      it_with(*args) do
-        begin
+      # Example with an implicit subject execution
+      def side_effects_with(*args)
+        it_with(*args) do
           subject
-        rescue Exception # rubocop:disable Lint/HandleExceptions, Lint/RescueException
+        rescue Exception # rubocop:disable Lint/SuppressedException, Lint/RescueException
         end
       end
-    end
 
-    def raise_error_with(*args)
-      raise_error_args = args
-      it_with_args     = raise_error_args.slice!(0, metadata[:inputs].size)
+      def raise_error_with(*args)
+        raise_error_args = args
+        it_with_args     = raise_error_args.slice!(0, metadata[:inputs].size)
 
-      it_with(*it_with_args) do
-        expect { subject }.to raise_error(*raise_error_args)
-      end
-    end
-
-    def its_with(attribute, *input_values, &block)
-      if block.nil? && (metadata[:inputs].size == input_values.size - 1)
-        expected_value = input_values.pop
-        block = proc { should eq(expected_value) }
+        it_with(*it_with_args) do
+          expect { subject }.to raise_error(*raise_error_args)
+        end
       end
 
-      describe("#{attribute} with #{input_values.join(', ')}") do
-        if attribute.is_a?(Array)
-          let(:__its_subject) { subject[*attribute] }
-        else
-          let(:__its_subject) do
-            attribute_chain = attribute.to_s.split('.')
-            attribute_chain.inject(subject) do |inner_subject, attr|
-              inner_subject.send(attr)
+      def its_with(attribute, *input_values, &block)
+        if block.nil? && (metadata[:inputs].size == input_values.size - 1)
+          expected_value = input_values.pop
+          block = proc { should eq(expected_value) }
+        end
+
+        describe("#{attribute} with #{input_values.join(', ')}") do
+          if attribute.is_a?(Array)
+            let(:__its_subject) { subject[*attribute] }
+          else
+            let(:__its_subject) do
+              attribute_chain = attribute.to_s.split('.')
+              attribute_chain.inject(subject) do |inner_subject, attr|
+                inner_subject.send(attr)
+              end
             end
           end
-        end
 
-        def should(matcher = nil, message = nil) # rubocop:disable Lint/NestedMethodDefinition
-          RSpec::Expectations::PositiveExpectationHandler.handle_matcher(
-            __its_subject, matcher, message
-          )
-        end
+          def should(matcher = nil, message = nil) # rubocop:disable Lint/NestedMethodDefinition
+            RSpec::Expectations::PositiveExpectationHandler.handle_matcher(
+              __its_subject, matcher, message
+            )
+          end
 
-        def should_not(matcher = nil, message = nil) # rubocop:disable Lint/NestedMethodDefinition
-          RSpec::Expectations::NegativeExpectationHandler.handle_matcher(
-            __its_subject, matcher, message
-          )
-        end
+          def should_not(matcher = nil, message = nil) # rubocop:disable Lint/NestedMethodDefinition
+            RSpec::Expectations::NegativeExpectationHandler.handle_matcher(
+              __its_subject, matcher, message
+            )
+          end
 
-        metadata[:inputs].each_index do |i|
-          key = metadata[:inputs][i]
-          let(key) { input_values[i] }
-        end
+          metadata[:inputs].each_index do |i|
+            key = metadata[:inputs][i]
+            value = input_values[i]
+            let(key) { _unwrap(value) }
+          end
 
-        example(nil, { input_values: input_values }, &block)
+          example(nil, { input_values: input_values }, &block)
+        end
       end
+
+      def with_context(proc, pretty_val = nil)
+        RSpec::Tabular::Wrapped.new(proc, pretty_val)
+      end
+
+      # TODO: it_behaves_like_with(example_name, inputs)
     end
 
-    # TODO: it_behaves_like_with(example_name, inputs)
+    # example level methods: e.g. inside before/it
+    module Example
+      def _unwrap(value)
+        return value unless value.is_a?(RSpec::Tabular::Wrapped)
+
+        instance_eval(&value.proc)
+      end
+    end
   end
 end
 
 RSpec.configure do |config|
-  config.extend(Rspec::Tabular)
+  config.extend(RSpec::Tabular::ExampleGroup)
+  config.include(RSpec::Tabular::Example)
 end
