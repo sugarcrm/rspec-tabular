@@ -94,6 +94,7 @@ module RSpec
 
   # rubocop:enable all
   module Tabular
+    # Example group methods e.g. inside describe/context block
     module ExampleGroup
       def inputs(*args)
         metadata[:inputs] ||= args
@@ -121,10 +122,8 @@ module RSpec
       # Example with an implicit subject execution
       def side_effects_with(*args)
         it_with(*args) do
-          begin
           subject
-          rescue Exception # rubocop:disable Lint/SuppressedException, Lint/RescueException
-          end
+        rescue Exception # rubocop:disable Lint/SuppressedException, Lint/RescueException
         end
       end
 
@@ -184,6 +183,7 @@ module RSpec
       # TODO: it_behaves_like_with(example_name, inputs)
     end
 
+    # example level methods: e.g. inside before/it
     module Example
       def _unwrap(value)
         return value unless value.is_a?(RSpec::Tabular::Wrapped)
