@@ -1,7 +1,7 @@
 # Rspec::Tabular
 
 [![Gem Version](https://badge.fury.io/rb/rspec-tabular.svg)](http://badge.fury.io/rb/rspec-tabular)
-[![Build Status](https://travis-ci.org/sugarcrm/rspec-tabular.svg?branch=master)](https://travis-ci.org/sugarcrm/rspec-tabular)
+[![Build Status](https://github.com/sugarcrm/rspec-tabular/actions/workflows/ci.yml/badge.svg)](https://github.com/sugarcrm/rspec-tabular/actions/workflows/ci.yml)
 [![Code Climate](https://codeclimate.com/github/sugarcrm/rspec-tabular/badges/gpa.svg)](https://codeclimate.com/github/sugarcrm/rspec-tabular)
 [![Test Coverage](https://codeclimate.com/github/sugarcrm/rspec-tabular/badges/coverage.svg)](https://codeclimate.com/github/sugarcrm/rspec-tabular/coverage)
 [![License](http://img.shields.io/badge/license-Apache2-green.svg?style=flat)](LICENSE)
@@ -145,7 +145,6 @@ Links to other places on the web where this projects exists:
 * [RubyGems](https://rubygems.org/gems/rspec-tabular)
 * [Ruby LibHunt](https://ruby.libhunt.com/rspec-tabular-alternatives)
 * [Ruby Toolbox](https://www.ruby-toolbox.com/projects/rspec-tabular)
-* [TravisCI](https://travis-ci.org/sugarcrm/rspec-tabular)
 
 ## Contributing
 
