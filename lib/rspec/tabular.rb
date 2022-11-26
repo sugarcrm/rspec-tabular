@@ -106,7 +106,7 @@ module RSpec
           block = proc { is_expected.to eq(expected_value) }
         end
 
-        context("with #{Hash[metadata[:inputs].zip input_values]}") do
+        context("with #{metadata[:inputs].zip(input_values).to_h}") do
           metadata[:inputs].each_index do |i|
             key = metadata[:inputs][i]
             value = input_values[i]
