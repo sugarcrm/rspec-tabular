@@ -37,4 +37,14 @@ task :license_finder do
   abort('LicenseFinder failed') unless $CHILD_STATUS.success?
 end
 
+desc 'Show which specified gems are outdated'
+task 'bundle:outdated' do
+  bundle_outdated_report_pathname =
+    Pathname(Rake.application.original_dir).join('tmp', 'bundle_outdated.txt')
+  bundle_outdated_report_pathname.dirname.mkpath
+
+  # TODO: Should consider re-writing this without using `tee`.
+  sh("bundle outdated --only-explicit | tee #{bundle_outdated_report_pathname}")
+end
+
 task default: %i[spec rubocop bundle:audit license_finder]
