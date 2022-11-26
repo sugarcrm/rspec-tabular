@@ -6,7 +6,6 @@
 [![Test Coverage](https://codeclimate.com/github/sugarcrm/rspec-tabular/badges/coverage.svg)](https://codeclimate.com/github/sugarcrm/rspec-tabular/coverage)
 [![License](http://img.shields.io/badge/license-Apache2-green.svg?style=flat)](LICENSE)
 
-[![Inline docs](http://inch-ci.org/github/sugarcrm/rspec-tabular.svg)](http://inch-ci.org/github/sugarcrm/rspec-tabular)
 [![RubyDoc](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](http://rubydoc.org/gems/rspec-tabular)
 
 Rspec extension for writing tabular examples
@@ -138,7 +137,6 @@ Links to other places on the web where this projects exists:
 
 * [Code Climate](https://codeclimate.com/github/sugarcrm/rspec-tabular)
 * [CucumberPro](https://app.cucumber.pro/projects/rspec-tabular)
-* [InchCI](http://inch-ci.org/github/sugarcrm/rspec-tabular)
 * [Github](https://github.com/sugarcrm/rspec-tabular)
 * [OpenHub](https://www.openhub.net/p/rspec-tabular)
 * [RubyDoc](http://rubydoc.org/gems/rspec-tabular)
