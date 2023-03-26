@@ -57,7 +57,7 @@ Scenario: A failing tabular spec
   When I run rspec with the documentation option
   Then the output should contain:
     """
-    Failure/Error: DEFAULT_FAILURE_NOTIFIER = lambda { |failure, _opts| raise failure }xxx
+    Failure/Error: DEFAULT_FAILURE_NOTIFIER = lambda { |failure, _opts| raise failure }
     """
   Then the output should contain:
     """
