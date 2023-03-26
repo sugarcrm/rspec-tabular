@@ -2,6 +2,8 @@
 
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
+require 'cucumber'
+require 'cucumber/rake/task'
 require 'rubocop/rake_task'
 require 'bundler/audit/task'
 require 'pathname'
@@ -10,6 +12,10 @@ require 'English'
 
 RSpec::Core::RakeTask.new(:spec) do |task|
   task.rspec_opts = '--warnings'
+end
+
+Cucumber::Rake::Task.new do |task|
+  task.cucumber_opts = '--publish-quiet'
 end
 
 RuboCop::RakeTask.new(:rubocop) do |task|
@@ -47,4 +53,4 @@ task 'bundle:outdated' do
   sh("bundle outdated --only-explicit | tee #{bundle_outdated_report_pathname}")
 end
 
-task default: %i[spec rubocop bundle:audit license_finder]
+task default: %i[spec cucumber rubocop bundle:audit license_finder]
