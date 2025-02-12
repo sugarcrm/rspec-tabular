@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 ### Changed
-- update the required ruby version from v2.2 to v2.6
+- update the required ruby version from v2.2 to v3.1
 
 ## [0.0.3] - 2022-01-24
 ### Added

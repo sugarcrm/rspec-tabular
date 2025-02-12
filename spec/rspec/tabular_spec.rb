@@ -98,8 +98,10 @@ describe Rspec::Tabular do
     subject { test_class }
 
     before do
-      allow(test_class).to receive(:method1).and_return(:result1)
-      allow(test_class).to receive(:method2).and_return(:result2)
+      allow(test_class).to receive_messages(
+        method1: :result1,
+        method2: :result2
+      )
     end
 
     inputs             :input1, :input2
