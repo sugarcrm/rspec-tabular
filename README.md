@@ -6,7 +6,7 @@
 [![Test Coverage](https://codeclimate.com/github/sugarcrm/rspec-tabular/badges/coverage.svg)](https://codeclimate.com/github/sugarcrm/rspec-tabular/coverage)
 [![License](http://img.shields.io/badge/license-Apache2-green.svg?style=flat)](LICENSE)
 
-[![RubyDoc](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](http://rubydoc.org/gems/rspec-tabular)
+[![RubyDoc](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](https://rubydoc.info/gems/rspec-tabular)
 
 Rspec extension for writing tabular examples
 
@@ -139,7 +139,7 @@ Links to other places on the web where this projects exists:
 * [CucumberPro](https://app.cucumber.pro/projects/rspec-tabular)
 * [Github](https://github.com/sugarcrm/rspec-tabular)
 * [OpenHub](https://www.openhub.net/p/rspec-tabular)
-* [RubyDoc](http://rubydoc.org/gems/rspec-tabular)
+* [RubyDoc](https://rubydoc.org/gems/rspec-tabular)
 * [RubyGems](https://rubygems.org/gems/rspec-tabular)
 * [Ruby LibHunt](https://ruby.libhunt.com/rspec-tabular-alternatives)
 * [Ruby Toolbox](https://www.ruby-toolbox.com/projects/rspec-tabular)
@@ -150,4 +150,4 @@ See [CONTRIBUTING](CONTRIBUTING.md) for how you can contribute changes back into
 
 ## License
 
-Copyright 2019 [SugarCRM Inc.](http://sugarcrm.com), released under the Apache2 License.
+Copyright 2025 [SugarCRM Inc.](http://sugarcrm.com), released under the [Apache2 License](https://www.apache.org/licenses/LICENSE-2.0.html).
